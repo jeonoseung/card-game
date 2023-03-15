@@ -6,12 +6,15 @@ interface state{
     success:boolean | undefined
     warning:number
     reset:number
+    score:number
 }
 export default function Cards({value,state,setState}:{value:number,state:state,setState:Dispatch<SetStateAction<state>>}){
     const [selected,setSelected] = useState<number>(1)
+    //특정 시간 뒤에 카드 숨기기
     useEffect(()=>{
         setTimeout(()=>setSelected(-1),3000)
     },[])
+    /** 카드 클릭 이벤트 */
     const click = () =>{
         if(selected === -1){
             setSelected(1)
@@ -20,6 +23,7 @@ export default function Cards({value,state,setState}:{value:number,state:state,s
             }))
         }
     }
+    //분기에 따라 배경색 변경
     const style:CSSProperties = {
         background:
             selected === 1

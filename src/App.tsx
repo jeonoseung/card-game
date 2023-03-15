@@ -1,4 +1,4 @@
-import React, {CSSProperties, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import './App.css';
 import Cards from "./component/cards";
 import styled from "styled-components";
@@ -6,8 +6,9 @@ interface state{
     array:number[]
     selected:number[]
     success:boolean | undefined
-    warning:number,
+    warning:number
     reset:number
+    score:number
 }
 function App() {
     const time = useRef<any>(null)
@@ -23,10 +24,11 @@ function App() {
         //실패 횟수
         warning:0,
         //리셋
-        reset:0
+        reset:0,
+        score:0
     })
     //행마다 카드 수
-    const rowLength = useMemo(()=>{return 6},[])
+    const rowLength = 6
     useEffect(()=>{
         mix()
     },[])
@@ -39,6 +41,7 @@ function App() {
             }
         }
         const c = [...arr];
+        //숫자 순서 섞기
         for(let i=0;i<rowLength*10;i++){
             const randomFir = Math.floor(Math.random()*c.length)
             const randomSec = Math.floor(Math.random()*c.length)
@@ -54,7 +57,7 @@ function App() {
         if(state.selected.length === 2){
             if(state.selected[0] === state.selected[1]){
                 setState((prev)=>({
-                    ...prev,success:true
+                    ...prev,success:true,score:prev.score+1
                 }))
             }
             else{
@@ -76,7 +79,7 @@ function App() {
     useEffect(()=>{
         if(state.warning === 5){
             setState((prev)=>({
-                ...prev,array:[],success:undefined,selected:[],warning:0,reset:prev.reset+1
+                ...prev,array:[],success:undefined,selected:[],warning:0,reset:prev.reset+1,score:0
             }))
         }
     },[state.warning])
@@ -89,6 +92,16 @@ function App() {
             time.current = setTimeout(()=>setMsg(''),3000)
         }
     },[msg])
+    useEffect(()=>{
+        if(state.score === rowLength*2){
+            setMsg('성공! 잠시 후 초기화 됩니다.')
+            setTimeout(()=>{
+                setState((prev)=>({
+                    ...prev,array:[],success:undefined,selected:[],warning:0,reset:prev.reset+1,score:0
+                }))
+            },3000)
+        }
+    },[state.score])
   return (
     <div className="App">
       <header className="App-header">
