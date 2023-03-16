@@ -123,7 +123,6 @@ const Around = styled.div`
   display:grid;
   gap:1rem;
   row-gap:1rem;
-  grid-template-columns:repeat(6,1fr);
 `
 const Message = styled.div`
   width:100%;
