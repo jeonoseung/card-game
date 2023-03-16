@@ -106,7 +106,7 @@ function App() {
     <div className="App">
       <header className="App-header">
           <Message>{msg}</Message>
-          <Around>
+          <Around className="cart-area">
               {
                   state.array.map((li:number,index)=>(
                       <Cards key={index} value={li} state={state} setState={setState}/>
