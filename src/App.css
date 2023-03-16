@@ -33,3 +33,25 @@
     transform: rotate(360deg);
   }
 }
+.card{
+  height:150px;
+}
+.card-font{
+  font-size:4rem;
+}
+@media (max-width:768px){
+  .card{
+    height:125px;
+  }
+  html{
+    font-size:12px;
+  }
+}
+@media (max-width:500px){
+  .card{
+    height:100px;
+  }
+  html{
+    font-size:10px;
+  }
+}

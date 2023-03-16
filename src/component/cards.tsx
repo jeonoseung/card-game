@@ -50,23 +50,21 @@ export default function Cards({value,state,setState}:{value:number,state:state,s
         }
     },[state.success])
     return(
-        <Area onClick={click} style={style}>
+        <Area onClick={click} style={style} className="card">
             {
                 selected === 1 || selected === 0
-                    ? <span>{value}</span>
-                    : <span>?</span>
+                    ? <span className="card-font">{value}</span>
+                    : <span className="card-font">?</span>
             }
         </Area>
     )
 }
 const Area = styled.div`
   width:100%;
-  height:150px;
   color:black;
   display:flex;
   align-items:center;
   justify-content: center;
-  font-size:4rem;
   font-weight:bold;
   border-radius:1rem;
   transition:all 0.5s;
